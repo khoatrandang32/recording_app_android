@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_height="200dp">
+
+  <HorizontalScrollView
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:id="@+id/recordingScrollView"
+      android:layout_weight="1"
+      android:fillViewport="true"
+      android:scrollbars="none"
+      android:layout_width="wrap_content"
+      android:layout_height="200dp">
+    <LinearLayout
+        android:layout_gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+      <com.example.recoderexampleapp.customView.WaveViewForRecorder
+          android:id="@+id/waveView"
+          android:layout_width="match_parent"
+          android:layout_height="200dp"/>
+    </LinearLayout>
+  </HorizontalScrollView>
+
+  <View
+      android:translationZ="10dp"
+      android:id="@+id/lineView"
+      android:background="@color/red"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_width="2dp"
+      android:layout_height="120dp"/>
+
+  <HorizontalScrollView
+      android:layout_weight="1"
+      android:id="@+id/recordingBgScrollView"
+      android:fillViewport="true"
+      android:scrollbars="none"
+      android:layout_width="1dp"
+      android:layout_height="200dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+      <com.example.recoderexampleapp.customView.WaveViewForRecorder
+          android:id="@+id/waveBgView"
+          android:layout_width="match_parent"
+          android:layout_height="200dp"/>
+    </LinearLayout>
+  </HorizontalScrollView>
+
+
+
+
+</LinearLayout>
