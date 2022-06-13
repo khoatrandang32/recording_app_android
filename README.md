@@ -5,5 +5,5 @@
 <img src="./src/play.gif" width="300" />
 
  Play recording screen with soundbar 
-  <br/>
-<img src="https://github.com/khoatrandang32/recording_app_android/blob/main/src/record.gif?raw=true" width="300" />
+  <br/>ec
+<img src="./src/record.gif" width="300" />
