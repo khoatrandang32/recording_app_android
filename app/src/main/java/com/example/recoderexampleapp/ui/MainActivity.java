@@ -15,8 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.recoderexampleapp.R;
-import com.example.recoderexampleapp.customView.WaveViewForPlayer;
-import com.example.recoderexampleapp.customView.WaveViewForRecorderAnimation;
+import com.example.recoderexampleapp.customView.WaveViewWrapper;
 import com.example.recoderexampleapp.utils.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -26,39 +25,30 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "KHOA";
+    private static final String LOG_TAG = "MainActivity";
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+
     private boolean permissionToRecordAccepted = false;
     private String [] permissions = {Manifest.permission.RECORD_AUDIO};
 
     private MediaRecorder recorder = null;
     private Timer timer;
-    private long time=0;
+    private long time=0; // time of recording
 
     ImageButton btnRecord,btnStop;
     FloatingActionButton fab;
     TextView txtTimeCount;
-    WaveViewForRecorderAnimation waveView;
-    WaveViewForPlayer waveViewForPlayer;
-
+    WaveViewWrapper waveView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        timer= new Timer();
+        initView();
+        initEvent();
+    }
 
-        waveViewForPlayer= findViewById(R.id.waveViewForPlayer);
-        fab= findViewById(R.id.fab);
-        btnStop= findViewById(R.id.btnStop);
-        btnRecord= findViewById(R.id.btnRecord);
-        txtTimeCount= findViewById(R.id.txtTimeCount);
-        waveView= findViewById(R.id.waveView);
-
-        waveView.setColor(getResources().getColor(R.color.purple_500));
-        waveView.setSubColor(getResources().getColor(R.color.red_90));
-
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
-
+    private void initEvent() {
+        //EVENT BINDING
         btnRecord.setOnClickListener(view -> {
             startRecording();
         });
@@ -68,8 +58,22 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(view -> {
             startActivity(new Intent(this, ListRecordsActivity.class));
         });
+
+        /// REQUEST  RECORD AUDIO PERMISSION
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
     }
 
+    private void initView() {
+        timer= new Timer();
+        fab= findViewById(R.id.fab);
+        btnStop= findViewById(R.id.btnStop);
+        btnRecord= findViewById(R.id.btnRecord);
+        txtTimeCount= findViewById(R.id.txtTimeCount);
+        waveView= findViewById(R.id.waveView);
+        waveView.setColor(getResources().getColor(R.color.purple_500));
+        waveView.setSubColor(getResources().getColor(R.color.red_90));
+
+    }
 
 
     @Override
@@ -85,25 +89,32 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startRecording() {
-        btnStop.setVisibility(View.VISIBLE);
-        btnRecord.setVisibility(View.GONE);
+        btnStop.setVisibility(View.VISIBLE);         //Show stop record button
+        btnRecord.setVisibility(View.GONE);           // Hide start record button
+
+
         timer= new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(() -> {
                     time+=25;
-                    txtTimeCount.setText(Utils.timeToString(time));
+                    txtTimeCount.setText(Utils.timeToString(time));  // Show recording time
+
                     if(recorder!=null){
                         waveView.addAmplitude(recorder.getMaxAmplitude());
+                        // add amplitude  to show wave of sound
                     }
                 });
             }
-        }, 25, 25);
-        //
-        long time= System.currentTimeMillis();
+        }, 25, 25); // run timer every 25ms
+
+        long time= System.currentTimeMillis(); // use time as record Id
+
         String fileName = getExternalCacheDir().getAbsolutePath();
-        fileName += "/audio_"+time+".3gp";
+        fileName += "/audio_"+time+".3gp"; // set up file name
+
+        // SET UP RECORDER
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -117,18 +128,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         recorder.start();
+        //start record
     }
 
     private void stopRecording() {
-        btnStop.setVisibility(View.GONE);
-        btnRecord.setVisibility(View.VISIBLE);
-        time=0;
-        txtTimeCount.setText(Utils.timeToString(time));
+        btnStop.setVisibility(View.GONE);   //Hide stop record button
+        btnRecord.setVisibility(View.VISIBLE); //Show stop record button
+
+
+        time=0; // reset recording time
+        txtTimeCount.setText(Utils.timeToString(time)); // reset recording time of textview
         recorder.stop();
         recorder.release();
-        recorder = null;
-        timer.cancel();
-        waveView.reset();
+        recorder = null; // stop and release recorder
+
+        timer.cancel(); // cancel timer
+        waveView.reset(); // reset wave view
 
     }
 

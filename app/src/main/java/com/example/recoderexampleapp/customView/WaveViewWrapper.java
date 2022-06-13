@@ -14,29 +14,29 @@ import androidx.annotation.Nullable;
 
 import com.example.recoderexampleapp.R;
 
-public class WaveViewForRecorderAnimation extends LinearLayout {
+public class WaveViewWrapper extends LinearLayout {
 
     LayoutParams layoutParams;
-    WaveViewForRecorder waveView,waveBgView;
+    WaveView waveView,waveBgView;
     HorizontalScrollView recordingScrollView,recordingBgScrollView;
     View lineView;
 
-    public WaveViewForRecorderAnimation(Context context) {
+    public WaveViewWrapper(Context context) {
         super(context);
         initView();
     }
 
-    public WaveViewForRecorderAnimation(Context context, @Nullable AttributeSet attrs) {
+    public WaveViewWrapper(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public WaveViewForRecorderAnimation(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WaveViewWrapper(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
 
-    public WaveViewForRecorderAnimation(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public WaveViewWrapper(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView();
     }

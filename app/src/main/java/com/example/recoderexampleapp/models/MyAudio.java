@@ -3,40 +3,40 @@ package com.example.recoderexampleapp.models;
 import java.io.Serializable;
 
 public class MyAudio implements Serializable {
-    String title;
-    String pathname;
-    Long time;
+    String name;
+    String path;
+    Long createAt;
     Long duration;
 
     public MyAudio(String title, String pathname, Long time, Long duration) {
-        this.title = title;
-        this.pathname = pathname;
-        this.time = time;
+        this.name = title;
+        this.path = pathname;
+        this.createAt = time;
         this.duration = duration;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPathname() {
-        return pathname;
+    public String getPath() {
+        return path;
     }
 
-    public void setPathname(String pathname) {
-        this.pathname = pathname;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    public Long getTime() {
-        return time;
+    public Long getCreateAt() {
+        return createAt;
     }
 
-    public void setTime(Long time) {
-        this.time = time;
+    public void setCreateAt(Long createAt) {
+        this.createAt = createAt;
     }
 
     public Long getDuration() {

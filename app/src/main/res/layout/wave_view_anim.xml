@@ -20,7 +20,7 @@
         android:layout_gravity="right"
         android:layout_width="match_parent"
         android:layout_height="200dp">
-      <com.example.recoderexampleapp.customView.WaveViewForRecorder
+      <com.example.recoderexampleapp.customView.WaveView
           android:id="@+id/waveView"
           android:layout_width="match_parent"
           android:layout_height="200dp"/>
@@ -49,7 +49,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="200dp">
-      <com.example.recoderexampleapp.customView.WaveViewForRecorder
+      <com.example.recoderexampleapp.customView.WaveView
           android:id="@+id/waveBgView"
           android:layout_width="match_parent"
           android:layout_height="200dp"/>

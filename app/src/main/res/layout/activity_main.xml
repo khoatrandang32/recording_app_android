@@ -11,16 +11,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.example.recoderexampleapp.customView.WaveViewForRecorderAnimation
+        <com.example.recoderexampleapp.customView.WaveViewWrapper
             android:id="@+id/waveView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="100dp" />
-
-        <com.example.recoderexampleapp.customView.WaveViewForPlayer
-            android:id="@+id/waveViewForPlayer"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
 
         <TextView
             android:id="@+id/txtTimeCount"

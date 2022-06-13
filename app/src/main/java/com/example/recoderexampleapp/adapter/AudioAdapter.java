@@ -42,8 +42,8 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioAdapter
     @Override
     public void onBindViewHolder(@NonNull AudioAdapterViewHolder holder, int position) {
         MyAudio item = listAudio.get(position);
-        holder.txtTitle.setText(item.getTitle());
-        holder.txtDesc.setText(Utils.timeToString(item.getDuration())+"   "+Utils.getDate(item.getTime(),"dd/MM/yyyy"));
+        holder.txtTitle.setText(item.getName());
+        holder.txtDesc.setText(Utils.timeToString(item.getDuration())+"   "+Utils.getDate(item.getCreateAt(),"dd/MM/yyyy"));
         holder.layoutContainer.setOnClickListener(view -> {
             listener.onItemClicked(item);
         });
